@@ -1,0 +1,40 @@
+name: 'Test action'
+on:
+  pull_request:
+    branches:
+      - 'master'
+  release:
+    branches:
+      - 'master'
+    types:
+      - created
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'parse_commit_args'
+        id: args
+        uses: LamaAni/parse-commit-args-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'show args'
+        run: echo "$THE_ARGS"
+        env:
+          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
+
+      - name: 'run on release only'
+        if: ${{steps.args.outputs.is_release=="true"}}
+        run: echo "$THE_ARGS"
+        env:
+          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
+
+      - name: 'run on use falg only'
+        if: ${{steps.args.outputs.my_flag=="120"}}
+        run: echo "$THE_ARGS"
+        env:
+          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
+
