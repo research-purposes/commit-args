@@ -13,7 +13,7 @@ jobs:
         uses: xom9ikk/split@v1
         id: split
         with:
-          string: github.event.comment.body
+          string: ${{ github.event.comment.body }}
           limit: -1
 
       - name: Some other action
