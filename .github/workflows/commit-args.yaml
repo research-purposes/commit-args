@@ -1,39 +1,23 @@
-name: 'Test action'
+name: Build on PR Comment
+
 on:
-  pull_request:
-    branches:
-      - 'master'
-  release:
-    branches:
-      - 'master'
+  issue_comment:
     types:
       - created
-  push:
-    branches:
-      - master
 jobs:
   build:
-    runs-on: ubuntu-latest
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, 'ghtoped setup')
+    runs-on: ubuntu-16.04
     steps:
-      - name: 'parse_commit_args'
-        id: args
-        uses: LamaAni/parse-commit-args-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Split version code
+        uses: xom9ikk/split@v1
+        id: split
+        with:
+          string: github.event.comment.body
+          limit: -1
 
-      - name: 'show args'
-        run: echo "$THE_ARGS"
-        env:
-          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
-
-      - name: 'run on release only'
-        if: ${{steps.args.outputs.is_release=="true"}}
-        run: echo "$THE_ARGS"
-        env:
-          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
-
-      - name: 'run on use falg only'
-        if: ${{steps.args.outputs.my_flag=="120"}}
-        run: echo "$THE_ARGS"
-        env:
-          THE_ARGS: '${{ toJSON(steps.args.outputs) }}'
+      - name: Some other action
+        with:
+          major: ${{ steps.split.outputs._0 }}
+          minor: ${{ steps.split.outputs._1 }}
+          patch: ${{ steps.split.outputs._2 }}
