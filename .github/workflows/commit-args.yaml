@@ -21,3 +21,5 @@ jobs:
           major: ${{ steps.split.outputs._0 }}
           minor: ${{ steps.split.outputs._1 }}
           patch: ${{ steps.split.outputs._2 }}
+          
+          #test
