@@ -18,8 +18,8 @@ jobs:
 
       - name: Some other action
         run: |
-          echo ${{ steps.split.outputs._0 }}
-          echo ${{ steps.split.outputs._1 }}
           echo ${{ steps.split.outputs.length }}
           echo ${{ steps.split.outputs.separator }}
-
+          echo ${{ steps.split.outputs.job }}
+          echo ${{ steps.split.outputs.environment }}
+          echo ${{ steps.split.outputs.config }}
