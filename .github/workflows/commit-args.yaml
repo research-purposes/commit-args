@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Split version code
-        uses: Team-Travel-Bareng/prompt-args@args-workflows
+        uses: Team-Travel-Bareng/prompt-args@nyoba-ya-gan
         id: split
         with:
           string: ${{ github.event.comment.body }}
