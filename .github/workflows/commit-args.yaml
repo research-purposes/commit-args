@@ -21,5 +21,6 @@ jobs:
         run: |
           echo ${{ steps.split.outputs._0 }}
           echo ${{ steps.split.outputs._1 }}
+          echo ${{ steps.split.outputs.length }}
           echo ${{ steps.split.outputs.separator }}
 
