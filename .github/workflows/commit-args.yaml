@@ -14,9 +14,10 @@ jobs:
         id: split
         with:
           comment: ${{ github.event.comment.body }}
-          limit: -1
 
       - name: Some other action
         run: |
-          echo ${{ fromJSON(steps.split.outputs.result).environment.value }}
+          echo ${{ steps.split.outputs.result }}
+       #   echo ${{ fromJSON(steps.split.outputs.result).environment.value }}
+          
 
