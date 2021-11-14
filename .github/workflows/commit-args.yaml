@@ -20,5 +20,6 @@ jobs:
           echo ${{ fromJSON(steps.split.outputs.result).env }}
           echo ${{ fromJSON(steps.split.outputs.result).tags }}
           echo ${{ fromJSON(steps.split.outputs.result).address }}
+          echo ${{ fromJSON(steps.split.outputs.result).playbook }}
           
 
