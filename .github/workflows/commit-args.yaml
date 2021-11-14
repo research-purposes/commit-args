@@ -18,7 +18,7 @@ jobs:
       - name: Some other action
         run: |
           echo ${{ fromJSON(steps.split.outputs.result).env }}
-          echo ${{ fromJSON(steps.split.outputs.result).config }}
+          echo ${{ fromJSON(steps.split.outputs.result).tags }}
           echo ${{ fromJSON(steps.split.outputs.result).address }}
           
 
