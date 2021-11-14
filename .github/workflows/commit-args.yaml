@@ -17,7 +17,8 @@ jobs:
 
       - name: Some other action
         run: |
-          echo ${{ steps.split.outputs.result }}
-       #   echo ${{ fromJSON(steps.split.outputs.result).environment.value }}
+          echo ${{ fromJSON(steps.split.outputs.result).env.value }}
+          echo ${{ fromJSON(steps.split.outputs.result).config.value }}
+          echo ${{ fromJSON(steps.split.outputs.result).address.value }}
           
 
