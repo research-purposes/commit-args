@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Split version code
-        uses: Team-Travel-Bareng/prompt-args@args-workflows
+        uses: Team-Travel-Bareng/prompt-args@comment-flags
         id: split
         with:
           string: ${{ github.event.comment.body }}
@@ -18,8 +18,5 @@ jobs:
 
       - name: Some other action
         run: |
-          echo ${{ steps.split.outputs.length }}
-          echo ${{ steps.split.outputs.separator }}
-          echo ${{ steps.split.outputs.job }}
-          echo ${{ steps.split.outputs.environment }}
-          echo ${{ steps.split.outputs.config }}
+          echo ${{ steps.split.outputs.result }}
+
