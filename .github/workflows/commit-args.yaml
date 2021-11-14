@@ -13,7 +13,7 @@ jobs:
         uses: Team-Travel-Bareng/prompt-args@comment-flags
         id: split
         with:
-          string: ${{ github.event.comment.body }}
+          comment: ${{ github.event.comment.body }}
           limit: -1
 
       - name: Some other action
