@@ -23,7 +23,9 @@ jobs:
           echo ${{ fromJSON(steps.split.outputs.result).playbook }}
           
       - name: list directory
-        run: ls
+        run: |
+          ls
+          pwd
           
       - name: script
         run: |
