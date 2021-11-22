@@ -24,7 +24,7 @@ jobs:
           
       - name: list directory
         run: |
-          ls
+          ls -la
           pwd
           
       - name: script
