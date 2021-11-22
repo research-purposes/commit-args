@@ -22,6 +22,9 @@ jobs:
           echo ${{ fromJSON(steps.split.outputs.result).address }}
           echo ${{ fromJSON(steps.split.outputs.result).playbook }}
           
+      - name: list directory
+        run: ls
+          
       - name: script
         run: |
           cd
