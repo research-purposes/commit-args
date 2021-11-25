@@ -9,10 +9,6 @@ jobs:
     if: github.event.issue.pull_request && (startsWith(github.event.comment.body, 'setup') || startsWith(github.event.comment.body, 'build'))
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
-        uses: actions/checkout@v2
-        with:
-          ref: master
           
       - name: Split version code
         uses: Team-Travel-Bareng/prompt-args@comment-flags
