@@ -61,4 +61,4 @@ jobs:
           NEEDS_CONTEXT: ${{ toJSON(needs) }}
         run: |
           echo "$NEEDS_CONTEXT"
-          echo ${{ needs.build-1.test-if.outputs.test-output }}
+          echo ${{ needs.build-1.outputs.test-output }}
