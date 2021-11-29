@@ -49,6 +49,7 @@ jobs:
       - name: Succeed
         run: |
           echo "ok"
+          exit 1
     
   run-if-fails:
     runs-on: ubuntu-latest
