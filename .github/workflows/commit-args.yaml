@@ -8,6 +8,8 @@ jobs:
   build-1:
     if: github.event.issue.pull_request && startsWith(github.event.comment.body, 'setup')
     runs-on: ubuntu-latest
+    outputs: 
+      result: ${{ steps.test-if.outputs.test-output }}
     steps:
           
       - name: Split version code
@@ -35,8 +37,8 @@ jobs:
             echo ::set-output name=test-output::$build
           fi          
                
-#       - name: Supposedly failed
-#         run: exit 1
+      - name: Supposedly failed
+        run: exit 1
   
         
       - name: echo outputs
