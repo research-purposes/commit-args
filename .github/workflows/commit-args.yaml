@@ -37,8 +37,8 @@ jobs:
             echo ::set-output name=test-output::$build
           fi          
                
-      - name: Supposedly failed
-        run: exit 1
+#       - name: Supposedly failed
+#         run: exit 1
   
         
       - name: echo outputs
