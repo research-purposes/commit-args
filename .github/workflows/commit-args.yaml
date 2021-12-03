@@ -40,15 +40,15 @@ jobs:
           echo ${{ toJSON(steps) }} >> steps.json
           for STEP in $(jq 'keys | .[]' steps.json)
           do
-            if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
-              $STEP >> failure.txt
-            fi
+            echo $STEP
           done
           cat failure.txt
         
 #       - name: echo outputs
 #         run: echo ${{ steps.test-if.outputs.test-output }}
-          
+#      if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
+#               $STEP >> failure.txt
+#             fi     
 #   build-2:
 #     runs-on: ubuntu-latest
 #     if: github.event.issue.pull_request && startsWith(github.event.comment.body, 'build')
