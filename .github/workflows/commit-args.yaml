@@ -38,7 +38,7 @@ jobs:
         if: steps.test-if.outputs.test-output != 'null'
         run: |
           echo ${{ toJSON(steps) }} >> steps.json
-          STEPS=$(jq -r 'keys | .[]' steps.json)
+          STEPS=$(jq steps.json | jq -r 'keys | .[]')
           
 #          for STEP in STEPS
 #          do
