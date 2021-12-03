@@ -38,8 +38,8 @@ jobs:
         run: |
           for STEPS in $(jq .[] ${{ toJSON(steps) }})
           do
-            if [[ STEPS.outcome == 'failure' ]]; then
-              STEPS >> failure.txt
+            if [[ $STEPS.outcome == 'failure' ]]; then
+              $STEPS >> failure.txt
           done
           cat failure.txt
         
