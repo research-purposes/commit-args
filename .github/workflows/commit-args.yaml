@@ -39,7 +39,7 @@ jobs:
         run: |
           echo ${{ toJSON(steps) }} >> steps.json
           cat steps.json
-          STEPS=$(jq steps.json | jq -r 'keys | .[]')
+#          STEPS=$(jq steps.json | jq -r 'keys | .[]')
           
 #          for STEP in STEPS
 #          do
