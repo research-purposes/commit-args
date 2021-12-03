@@ -40,7 +40,7 @@ jobs:
           echo ${{ toJSON(steps) }} >> steps.json
           for STEP in $(jq 'keys | .[]' steps.json)
           do
-            if [[ $(jq '.$STEP.outcome' steps.json) == 'failure' ]]; then
+            if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
               $STEP >> failure.txt
             fi
           done
