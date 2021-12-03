@@ -39,11 +39,12 @@ jobs:
         run: |
           echo ${{ toJSON(steps) }} >> steps.json
           STEPS=$(jq -r 'keys | .[]' steps.json)
-          for STEP in STEPS
-          do
-            echo $STEP
-          done
-          cat failure.txt
+          
+#          for STEP in STEPS
+#          do
+#            echo $STEP
+#          done
+#          cat failure.txt
         
 #       - name: echo outputs
 #         run: echo ${{ steps.test-if.outputs.test-output }}
