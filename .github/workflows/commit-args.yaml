@@ -41,7 +41,8 @@ jobs:
         run: |
             echo "$STEPS" >> steps.json
             cat steps.json
-            for STEP in $(jq steps.json | jq -r 'keys | .[]')
+            ALL_STEPS=$(jq 'keys | .[]' steps.json)
+            for STEP in $ALL_STEPS
             do
               if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
                 $STEP >> failure.txt
