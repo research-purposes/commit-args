@@ -29,7 +29,11 @@ jobs:
           fi
           if [[ "${{ startsWith(github.event.comment.body, 'build') }}" == 'true' ]]; then
             echo ::set-output name=test-output::$build
-          fi          
+          fi
+          
+      - name: test again
+        id: test-1
+        run: echo ::set-output name=test-1::test-1
                
 #       - name: Supposedly failed
 #         run: exit 1
