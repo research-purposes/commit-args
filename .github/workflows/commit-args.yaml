@@ -34,9 +34,11 @@ jobs:
 #       - name: Supposedly failed
 #         run: exit 1
       - name: test conditional
+        id: test-conditional
         if: steps.test-if.outputs.test-output != 'null'
         run: |
-          for STEP in $(jq 'keys | .[]' ${{ toJSON(steps) }} )
+          echo ${{ toJSON(steps) }} >> steps.json
+          for STEP in $(jq 'keys | .[]' steps.json)
           do
             if [[ steps.$STEP.outcome == 'failure' ]]; then
               $STEP >> failure.txt
