@@ -12,11 +12,11 @@ jobs:
       result: ${{ steps.test-if.outputs.test-output }}
     steps:
           
-      - name: Split version code
-        uses: Team-Travel-Bareng/prompt-args@comment-flags
-        id: split-comment
-        with:
-          comment: ${{ github.event.comment.body }}
+#       - name: Split version code
+#         uses: Team-Travel-Bareng/prompt-args@comment-flags
+#         id: split-comment
+#         with:
+#           comment: ${{ github.event.comment.body }}
 
           
       - name: test if
