@@ -41,8 +41,13 @@ jobs:
 #         run: exit 1
       - name: test conditional
         if: steps.test-if.outputs.test-output != 'null'
-        run: echo ${{ toJSON(steps) }}
-  
+        run: |
+          for STEPS in ${{ toJSON(steps) }}
+          do
+            if [[ STEPS.outcome == 'failure' ]]; then
+              STEPS >> failure.txt
+          done
+          cat failure.txt
         
 #       - name: echo outputs
 #         run: echo ${{ steps.test-if.outputs.test-output }}
