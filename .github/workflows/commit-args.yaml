@@ -40,6 +40,7 @@ jobs:
           do
             if [[ steps.$STEP.outcome == 'failure' ]]; then
               $STEP >> failure.txt
+            fi
           done
           cat failure.txt
         
