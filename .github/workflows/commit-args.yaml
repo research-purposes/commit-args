@@ -14,16 +14,10 @@ jobs:
           
       - name: Split version code
         uses: Team-Travel-Bareng/prompt-args@comment-flags
-        id: split
+        id: split-comment
         with:
           comment: ${{ github.event.comment.body }}
 
-      - name: Some other action
-        run: |
-          echo ${{ fromJSON(steps.split.outputs.result).env }}
-          echo ${{ fromJSON(steps.split.outputs.result).tags }}
-          echo ${{ fromJSON(steps.split.outputs.result).address }}
-          echo ${{ fromJSON(steps.split.outputs.result).playbook }}
           
       - name: test if
         id: test-if
