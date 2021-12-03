@@ -41,7 +41,7 @@ jobs:
 #         run: exit 1
       - name: test conditional
         if: steps.test-if.outputs.test-output != 'null'
-        run: echo ${{ steps.test-if.outputs.test-output }}
+        run: echo ${{ toJSON(steps) }}
   
         
 #       - name: echo outputs
