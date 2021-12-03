@@ -36,8 +36,10 @@ jobs:
       - name: test conditional
         id: test-conditional
         if: steps.test-if.outputs.test-output != 'null'
+        env:
+          STEPS: ${{ toJSON(steps) }}
         run: |
-            ${{ steps }}
+            echo "$STEPS" >> steps.json
 #          cat steps.json
 #          STEPS=$(jq steps.json | jq -r 'keys | .[]')
           
