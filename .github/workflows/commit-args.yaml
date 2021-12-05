@@ -41,7 +41,7 @@ jobs:
         
       - name: test conditional
         id: test_conditional
-        if: steps.test_if.outputs.test-output != 'null'
+        if: steps.test_if.outputs.test-output != 'null' && always()
         env:
           STEPS: ${{ toJSON(steps) }}
         run: |
