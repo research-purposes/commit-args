@@ -37,7 +37,7 @@ jobs:
                
       - name: Supposedly failed
         id: test_2
-        run: exit 1 2&1 | tee error.txt
+        run: exit 1 2>&1 | tee error.txt
         
       - name: test conditional
         id: test_conditional
