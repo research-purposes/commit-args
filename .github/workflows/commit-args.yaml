@@ -35,8 +35,10 @@ jobs:
         id: test_1
         run: echo ::set-output name=test-1::test-1
                
-#       - name: Supposedly failed
-#         run: exit 1
+      - name: Supposedly failed
+        id: test_2
+        run: exit 1
+        
       - name: test conditional
         id: test_conditional
         if: steps.test_if.outputs.test-output != 'null'
@@ -45,7 +47,7 @@ jobs:
         run: |
             echo "$STEPS" >> steps.json
             cat steps.json
-            jq 'keys[] as $k | select(.[$k].outcome=="success") | $k' >> failure.txt
+            jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' >> failure.txt
             cat failure.txt
 #            for STEP in $ALL_STEPS
 #            do
