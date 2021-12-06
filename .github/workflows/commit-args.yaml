@@ -106,7 +106,7 @@ jobs:
           echo ${{ needs.build-1.outputs.test-output }}
           for STEP in $(jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps/steps.json)
           do 
-            echo "    - $STEP"
+            echo "    - $STEP ❌"
           done >> failure.txt
           
           failure=$(cat failure.txt)
