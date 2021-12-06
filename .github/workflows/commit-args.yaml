@@ -38,7 +38,7 @@ jobs:
       - name: Supposedly failed
         id: test_2
         run: |
-          exit 1 2>&1 | tee error.txt
+          exit 1
         
       - name: test conditional
         id: test_conditional
@@ -49,8 +49,7 @@ jobs:
             echo "$STEPS" >> steps.json
             jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json >> failure.txt
             cat failure.txt
-            cat error.txt
-            echo "${{ steps.test_2.outputs.stderr }}"
+            echo "${{ steps.test_2.outputs.stdout }}"
 #            for STEP in $ALL_STEPS
 #            do
 #              if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
