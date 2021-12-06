@@ -49,6 +49,7 @@ jobs:
             echo "$STEPS" >> steps.json
             
       - name: Upload result for job 1
+        if: always()
         uses: actions/upload-artifact@v1
         with:
           name: steps
