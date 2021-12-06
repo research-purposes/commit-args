@@ -48,7 +48,6 @@ jobs:
             echo "$STEPS" >> steps.json
             jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json >> failure.txt
             cat failure.txt
-            cat error.txt
             ${{ steps.test_2.outputs.stderr }}
 #            for STEP in $ALL_STEPS
 #            do
