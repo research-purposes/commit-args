@@ -42,15 +42,21 @@ jobs:
         
       - name: test conditional
         id: test_conditional
-        if: steps.test_if.outputs.test-output != 'null' && always()
+        if: failure() && steps.test_if.outputs.test-output != 'null' && always()
         env:
           STEPS: ${{ toJSON(steps) }}
         run: |
             echo "$STEPS" >> steps.json
-            jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json >> failure.txt
-            cat failure.txt
-            cat error.txt
-            echo "${{ steps.test_2.outputs.stdout }}"
+            
+      - name: Upload result for job 1
+        uses: actions/upload-artifact@v1
+        with:
+          name: steps
+          path: steps.json
+#            jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json >> failure.json
+#            cat failure.txt
+#            cat error.txt
+#            echo "${{ steps.test_2.outputs.stdout }}"
 #            for STEP in $ALL_STEPS
 #            do
 #              if [[ $(jq '.${STEP}.outcome' steps.json) == 'failure' ]]; then
@@ -80,14 +86,33 @@ jobs:
 #           echo "ok"
 #           exit 1
     
-#   run-if-fails:
-#     runs-on: ubuntu-latest
-#     needs: [build-1, build-2]
-#     if: failure()
-#     steps:
-#       - name: Needs context
-#         env:
-#           NEEDS_CONTEXT: ${{ toJSON(needs) }}
-#         run: |
-#           echo "$NEEDS_CONTEXT"
-#           echo ${{ needs.build-1.outputs.test-output }}
+  run-if-fails:
+    runs-on: ubuntu-latest
+    needs: [build-1]
+    if: failure()
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: steps
+          
+      - name: Needs context
+        id: context
+        env:
+          NEEDS_CONTEXT: ${{ toJSON(needs) }}
+        run: |
+          echo "$NEEDS_CONTEXT"
+          echo ${{ needs.build-1.outputs.test-output }}
+          for STEP in $(jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json)
+          do 
+            echo "    - $STEP"
+          done >> failure.txt
+          
+          failure=$(cat failure.txt)
+          failure="${failure//$'\n'/'%0A'}"
+          echo "::set-output name=failure::$failure"
+          
+      - name: echo
+        run: |
+          echo ${{ steps.context.outputs.failure }}
+          echo ${{ steps.
