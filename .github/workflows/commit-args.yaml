@@ -47,10 +47,7 @@ jobs:
           STEPS: ${{ toJSON(steps) }}
         run: |
             echo "$STEPS" >> steps.json
-            curl \
-            -H "Authorization: token ${{ secrets.TOKEN_TEST }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/research-purposes/commit-args/actions/runs/1555972229/jobs
+            
             
       - name: Upload result for job 1
         if: always()
@@ -120,4 +117,4 @@ jobs:
       - name: echo
         run: |
           echo ${{ steps.context.outputs.failure }}
-          echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          gh run view --job build-1 --log | grep error
