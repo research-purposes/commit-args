@@ -48,6 +48,7 @@ jobs:
         run: |
             echo "$STEPS" >> steps.json
             curl \
+            -H "Authorization: token ${{ secrets.TOKEN_TEST }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/research-purposes/commit-args/actions/runs/1555972229/jobs
             
