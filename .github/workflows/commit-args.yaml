@@ -47,7 +47,7 @@ jobs:
           STEPS: ${{ toJSON(steps) }}
         run: |
             echo "$STEPS" >> steps.json
-            echo ${{ github.job_id }}
+            echo ${{ github.jobs.id }}
             
       - name: Upload result for job 1
         if: always()
