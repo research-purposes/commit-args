@@ -47,7 +47,7 @@ jobs:
           STEPS: ${{ toJSON(steps) }}
         run: |
             echo "$STEPS" >> steps.json
-            env
+            echo ${{ github.job_id }}
             
       - name: Upload result for job 1
         if: always()
