@@ -49,7 +49,7 @@ jobs:
             echo "$STEPS" >> steps.json
             curl \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/research-purposes/commit-args/actions/runs/${{ github.run_id }}/jobs
+            https://api.github.com/repos/research-purposes/commit-args/actions/runs/1555972229/jobs
             
       - name: Upload result for job 1
         if: always()
