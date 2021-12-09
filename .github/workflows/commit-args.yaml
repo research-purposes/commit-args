@@ -47,6 +47,7 @@ jobs:
         env:
           STEPS: ${{ toJSON(steps) }}
         run: |
+            cat log/github-action.error.log
             echo "$STEPS" >> steps.json
             
             
