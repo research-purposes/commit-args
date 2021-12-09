@@ -117,4 +117,6 @@ jobs:
       - name: echo
         run: |
           echo ${{ steps.context.outputs.failure }}
-          gh run view --job build-1 --log | grep error
+          gh run view --job 4462945173 --log | grep error
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_TEST }}
