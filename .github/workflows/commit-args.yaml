@@ -121,3 +121,11 @@ jobs:
           -H "Authorization: ${{ secrets.TOKEN_TEST }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/research-purposes/commit-args/actions/runs/1555972229/logs
+
+
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+          github_token: ${{ secrets.TOKEN_TEST }}
+          job_name: build-1
