@@ -38,7 +38,7 @@ jobs:
       - name: Supposedly failed
         id: test_2
         run: |
-          exit 1 >> error.txt
+          exit 1 >> $ERROR_MESSAGE
         
       - name: test conditional
         id: test_conditional
@@ -117,6 +117,7 @@ jobs:
       - name: echo
         run: |
           echo ${{ steps.context.outputs.failure }}
-          gh run view --job 4462945173 --log | grep error
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TEST }}
+          curl \
+          -H "Authorization: ${{ secrets.TOKEN_TEST }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/research-purposes/commit-args/actions/runs/1555972229/logs
