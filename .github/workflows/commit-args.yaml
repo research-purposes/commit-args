@@ -38,7 +38,8 @@ jobs:
       - name: Supposedly failed
         id: test_2
         run: |
-          exit 1 >> /var/log/github-action.error.log
+          mkdir log
+          exit 1 >> log/github-action.error.log
         
       - name: test conditional
         id: test_conditional
