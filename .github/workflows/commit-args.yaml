@@ -38,8 +38,8 @@ jobs:
       - name: Supposedly failed
         id: test_2
         run: |
-          mkdir log
-          exit 1 >> log/github-action.error.log
+          mkdir log-test
+          echo "test" 2>&1 | tee log-test/github-action.txt
         
       - name: test conditional
         id: test_conditional
@@ -47,7 +47,7 @@ jobs:
         env:
           STEPS: ${{ toJSON(steps) }}
         run: |
-            cat log/github-action.error.log
+            cat log-test/github-action.txt
             echo "$STEPS" >> steps.json
             
             
@@ -57,6 +57,14 @@ jobs:
         with:
           name: steps
           path: steps.json
+          
+          
+      - name: Upload result for job 1
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: log
+          path: log-test
 #            jq 'keys[] as $k | select(.[$k].outcome=="failure") | $k' steps.json >> failure.json
 #            cat failure.txt
 #            cat error.txt
@@ -100,6 +108,11 @@ jobs:
         with:
           name: steps
           
+      - name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: log
+          
       - name: Needs context
         id: context
         env:
@@ -115,6 +128,9 @@ jobs:
           failure=$(cat failure.txt)
           failure="${failure//$'\n'/'%0A'}"
           echo "::set-output name=failure::$failure"
+          ls log
+          ls log-test
+          ls log/log-test
           
       - name: echo
         run: |
