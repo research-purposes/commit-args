@@ -43,7 +43,7 @@ jobs:
         
       - name: test conditional
         id: test_conditional
-        if: failure() && steps.test_if.outputs.test-output != 'null' && always()
+        if: steps.test_if.outputs.test-output != 'null' && always()
         run: |
             cat log-test/github-action.txt
             "${{ toJSON(steps) }}" >> steps.json
