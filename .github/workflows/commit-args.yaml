@@ -45,7 +45,7 @@ jobs:
         id: test_conditional
         if: steps.test_if.outputs.test-output != 'null' && always()
         run: |
-            BODY=$(cat log-test/github-action.txt) >> $GITHUB_ENV
+            echo "BODY=$(cat log-test/github-action.txt)" >> $GITHUB_ENV
             > steps.json cat <<< "${{ toJSON(steps) }}"
             env
             
