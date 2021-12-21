@@ -44,11 +44,10 @@ jobs:
       - name: test conditional
         id: test_conditional
         if: failure() && steps.test_if.outputs.test-output != 'null' && always()
-        env:
-          STEPS: ${{ toJSON(steps) }}
         run: |
             cat log-test/github-action.txt
-            echo "$STEPS" >> steps.json
+            "${{ toJSON(steps) }}" >> steps.json
+            cat steps.json
             
             
       - name: Upload result for job 1
