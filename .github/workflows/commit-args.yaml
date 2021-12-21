@@ -46,7 +46,7 @@ jobs:
         if: steps.test_if.outputs.test-output != 'null' && always()
         run: |
             cat log-test/github-action.txt
-            echo toJSON(steps) > steps.json
+            echo "${{ toJSON(steps) }}" > steps.json
             cat steps.json
             
             
