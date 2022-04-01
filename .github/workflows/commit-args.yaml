@@ -48,6 +48,8 @@ jobs:
             echo "BODY=$(cat log-test/github-action.txt)" >> $GITHUB_ENV
             > steps.json cat <<< "${{ toJSON(steps) }}"
             env
+            echo ${{ github.repository }}
+            echo ${{ github.repository_owner }}
             
             
       - name: Upload result for job 1
