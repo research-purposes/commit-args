@@ -135,4 +135,6 @@ jobs:
         run: |
           echo ${{ steps.context.outputs.failure }}
           ls /var/log
+          echo ${{ github.repository }}
+          echo ${{ github.repository_owner }}
 
